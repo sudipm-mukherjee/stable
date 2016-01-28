@@ -1,0 +1,268 @@
+language: c
+compiler:
+  - gcc
+
+addons:
+    apt:
+      packages:
+         - bc
+         - lftp
+         - gcc-multilib
+         - uboot-mkimage
+         - lzop
+
+cache:
+  apt: true
+#  ccache: true
+  directories:
+     - $HOME/local
+#    - $HOME/.ccache
+
+#sudo: required
+
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+#   - secure: "qoWQ6Bi/n4mVP+wlDINo3cPQDfC8V7Yofjh+WmBxKwLqP+RPzCgEkbPqitAZhRpr2QLe/Eehfwx0WvuEJjucOm5lWEkFpY32VCXCjswK5R4S1G2LPobo9BOLkPY9pjahru56HPWDGAbIVQ74UXmnkPCFfOOOZLLXry1pzbKfDNdX+LryTvtrK9e4MlvBIp2xNQgzZRLWos8JoxncvW04jYaRBAQ9zn+DWiZxlEHzdClPLEQsJnKGmk3LaWCV1CRg0ZXQvecieEWmdN5mrpNF4H8ry9A4No3rSXMgloucJEWaHqCMFYXuWcqgQY4GHemHiF06bM6LF4fFAPWupFW++e03NRFrbm7KF3xWpSReTltrKA0kz2ctdWvfFN+DZSZ+5R2rmcoFG3dp+7mO5WcT5gTfHrF8ZxfHMFR9MqQHMiOntpuXXZTMq7uaqURRlzFeZ0rFluzK7S2EEbn1nQEuWdoGvMBSRFHFU5nvXEq1ooQRAY/K15XXHTHni9/9yU/+9+hG2tDbv3gtkYMnHFjtuDrQeQkfTKuWe94B+lVmWaC7ozO4agE555bQXYGLP2KF9DmqP1dkRLSGNAMJXN6NqA3l9ufk16mo+fjxT7YnN4mo5/xxMpxlN+e3OLHzrpZuwS/bvxK2kEGJdDvAprNWwkfy7VA+8dvkkPjeFS07tyk="
+
+
+#  coverity_scan:
+#    project:
+#      name: "sudipm-mukherjee/parport"
+#      description: "linux 4.2"
+#    notification_email: sudipm.mukherjee@gmail.com
+#    build_command_prepend: "make allmodconfig; make oldconfig && make prepare;"
+#    build_command:   "make -j2"
+#    branch_pattern: linux
+  matrix:
+      - fld="i386,defconfig"
+      - fld="x86_64,defconfig"
+      - fld="alpha,defconfig"
+      - fld="arm,defconfig"
+#      - fld="avr32,defconfig"
+      - fld="blackfin,defconfig"
+      - fld="cris,defconfig"
+      - fld="m32r,defconfig"
+      - fld="m68k,defconfig"
+      - fld="mips,defconfig"
+      - fld="powerpc,defconfig"
+      - fld="s390,defconfig"
+      - fld="sparc,defconfig"
+      - fld="sparc64,defconfig"
+      - fld="tilegx,defconfig"
+      - fld="tilepro,defconfig"
+      - fld="xtensa,defconfig"
+      - fld="i386,allmodconfig"
+      - fld="x86_64,allmodconfig"
+      - fld="alpha,allmodconfig"
+      - fld="arm,allmodconfig"
+#      - fld="avr32,allmodconfig"
+      - fld="blackfin,allmodconfig"
+#      - fld="cris,allmodconfig"
+      - fld="m32r,allmodconfig"
+      - fld="m68k,allmodconfig"
+      - fld="mips,allmodconfig"
+      - fld="powerpc,allmodconfig"
+      - fld="s390,allmodconfig"
+      - fld="sparc,allmodconfig"
+      - fld="sparc64,allmodconfig"
+#      - fld="tile,allmodconfig"
+      - fld="tilegx,allmodconfig"
+      - fld="tilepro,allmodconfig"
+      - fld="xtensa,allmodconfig"
+      - fld="m32r,m32104ut_defconfig"
+      - fld="m32r,m32700ut.up_defconfig"
+      - fld="m32r,mappi.nommu_defconfig"
+      - fld="m32r,mappi.smp_defconfig"
+      - fld="m32r,mappi.up_defconfig"
+      - fld="m32r,mappi2.opsp_defconfig"
+      - fld="m32r,mappi2.vdec2_defconfig"
+      - fld="m32r,mappi3.smp_defconfig"
+      - fld="m32r,oaks32r_defconfig"
+      - fld="m32r,opsput_defconfig"
+      - fld="m32r,usrv_defconfig"
+      - fld="mips,ar7_defconfig"
+      - fld="mips,ath79_defconfig"
+      - fld="mips,bcm47xx_defconfig"
+      - fld="mips,bcm63xx_defconfig"
+      - fld="mips,bigsur_defconfig"
+      - fld="mips,bmips_be_defconfig"
+      - fld="mips,bmips_stb_defconfig"
+      - fld="mips,capcella_defconfig"
+      - fld="mips,cavium_octeon_defconfig"
+      - fld="mips,ci20_defconfig"
+      - fld="mips,cobalt_defconfig"
+      - fld="mips,db1xxx_defconfig"
+      - fld="mips,decstation_defconfig"
+      - fld="mips,e55_defconfig"
+      - fld="mips,fuloong2e_defconfig"
+      - fld="mips,gpr_defconfig"
+      - fld="mips,ip27_defconfig"
+      - fld="mips,ip32_defconfig"
+      - fld="mips,jazz_defconfig"
+      - fld="mips,jmr3927_defconfig"
+      - fld="mips,lasat_defconfig"
+      - fld="mips,lemote2f_defconfig"
+#      - fld="mips,loongson3_defconfig" mips64
+      - fld="mips,ls1b_defconfig"
+      - fld="mips,malta_defconfig"
+      - fld="mips,malta_kvm_defconfig"
+      - fld="mips,malta_kvm_guest_defconfig"
+      - fld="mips,maltaaprp_defconfig"
+      - fld="mips,maltasmvp_defconfig"
+      - fld="mips,maltasmvp_eva_defconfig"
+      - fld="mips,maltaup_defconfig"
+      - fld="mips,maltaup_xpa_defconfig"
+      - fld="mips,markeins_defconfig"
+      - fld="mips,mips_paravirt_defconfig"
+      - fld="mips,mpc30x_defconfig"
+      - fld="mips,msp71xx_defconfig"
+      - fld="mips,mtx1_defconfig"
+      - fld="mips,nlm_xlp_defconfig"
+      - fld="mips,nlm_xlr_defconfig"
+      - fld="mips,pic32mzda_defconfig"
+      - fld="mips,pistachio_defconfig"
+      - fld="mips,pnx8335_stb225_defconfig"
+      - fld="mips,qi_lb60_defconfig"
+      - fld="mips,rb532_defconfig"
+      - fld="mips,rbtx49xx_defconfig"
+      - fld="mips,rm200_defconfig"
+      - fld="mips,rt305x_defconfig"
+      - fld="mips,sb1250_swarm_defconfig"
+      - fld="mips,sead3_defconfig"
+      - fld="mips,sead3micro_defconfig"
+      - fld="mips,tb0219_defconfig"
+      - fld="mips,tb0226_defconfig"
+      - fld="mips,tb0287_defconfig"
+      - fld="mips,workpad_defconfig"
+      - fld="mips,xilfpga_defconfig"
+      - fld="mips,xway_defconfig"
+      - fld="arm,acs5k_defconfig"
+      - fld="arm,acs5k_tiny_defconfig"
+      - fld="arm,am200epdkit_defconfig"
+      - fld="arm,assabet_defconfig"
+      - fld="arm,at91_dt_defconfig"
+      - fld="arm,axm55xx_defconfig"
+      - fld="arm,badge4_defconfig"
+      - fld="arm,bcm2835_defconfig"
+      - fld="arm,bcm_defconfig"
+      - fld="arm,cerfcube_defconfig"
+      - fld="arm,clps711x_defconfig"
+      - fld="arm,cm_x2xx_defconfig"
+      - fld="arm,cm_x300_defconfig"
+      - fld="arm,cns3420vb_defconfig"
+      - fld="arm,colibri_pxa270_defconfig"
+      - fld="arm,colibri_pxa300_defconfig"
+      - fld="arm,collie_defconfig"
+      - fld="arm,corgi_defconfig"
+      - fld="arm,davinci_all_defconfig"
+      - fld="arm,dove_defconfig"
+      - fld="arm,ebsa110_defconfig"
+      - fld="arm,efm32_defconfig"
+      - fld="arm,em_x270_defconfig"
+      - fld="arm,ep93xx_defconfig"
+      - fld="arm,eseries_pxa_defconfig"
+      - fld="arm,exynos_defconfig"
+      - fld="arm,ezx_defconfig"
+      - fld="arm,footbridge_defconfig"
+      - fld="arm,h3600_defconfig"
+      - fld="arm,h5000_defconfig"
+      - fld="arm,hackkit_defconfig"
+      - fld="arm,hisi_defconfig"
+      - fld="arm,imote2_defconfig"
+      - fld="arm,imx_v4_v5_defconfig"
+      - fld="arm,imx_v6_v7_defconfig"
+      - fld="arm,integrator_defconfig"
+      - fld="arm,iop13xx_defconfig"
+      - fld="arm,iop32x_defconfig"
+      - fld="arm,iop33x_defconfig"
+      - fld="arm,ixp4xx_defconfig"
+      - fld="arm,jornada720_defconfig"
+      - fld="arm,keystone_defconfig"
+      - fld="arm,ks8695_defconfig"
+      - fld="arm,lart_defconfig"
+      - fld="arm,lpc18xx_defconfig"
+      - fld="arm,lpc32xx_defconfig"
+      - fld="arm,lpd270_defconfig"
+      - fld="arm,lubbock_defconfig"
+      - fld="arm,magician_defconfig"
+      - fld="arm,mainstone_defconfig"
+      - fld="arm,mini2440_defconfig"
+      - fld="arm,mmp2_defconfig"
+      - fld="arm,moxart_defconfig"
+      - fld="arm,multi_v5_defconfig"
+      - fld="arm,mv78xx0_defconfig"
+      - fld="arm,mvebu_v5_defconfig"
+      - fld="arm,mvebu_v7_defconfig"
+      - fld="arm,mxs_defconfig"
+      - fld="arm,neponset_defconfig"
+      - fld="arm,netwinder_defconfig"
+      - fld="arm,netx_defconfig"
+      - fld="arm,nhk8815_defconfig"
+      - fld="arm,nuc910_defconfig"
+      - fld="arm,nuc950_defconfig"
+      - fld="arm,nuc960_defconfig"
+      - fld="arm,omap1_defconfig"
+      - fld="arm,omap2plus_defconfig"
+      - fld="arm,orion5x_defconfig"
+      - fld="arm,palmz72_defconfig"
+      - fld="arm,pcm027_defconfig"
+      - fld="arm,pleb_defconfig"
+      - fld="arm,prima2_defconfig"
+      - fld="arm,pxa168_defconfig"
+      - fld="arm,pxa255-idp_defconfig"
+      - fld="arm,pxa3xx_defconfig"
+      - fld="arm,pxa910_defconfig"
+      - fld="arm,pxa_defconfig"
+      - fld="arm,qcom_defconfig"
+      - fld="arm,raumfeld_defconfig"
+      - fld="arm,realview-smp_defconfig"
+      - fld="arm,realview_defconfig"
+      - fld="arm,rpc_defconfig"
+      - fld="arm,s3c2410_defconfig"
+      - fld="arm,s3c6400_defconfig"
+      - fld="arm,s5pv210_defconfig"
+      - fld="arm,sama5_defconfig"
+      - fld="arm,shannon_defconfig"
+      - fld="arm,shmobile_defconfig"
+      - fld="arm,simpad_defconfig"
+      - fld="arm,socfpga_defconfig"
+      - fld="arm,spear13xx_defconfig"
+      - fld="arm,spear3xx_defconfig"
+      - fld="arm,spear6xx_defconfig"
+      - fld="arm,spitz_defconfig"
+      - fld="arm,stm32_defconfig"
+      - fld="arm,sunxi_defconfig"
+      - fld="arm,tct_hammer_defconfig"
+      - fld="arm,tegra_defconfig"
+      - fld="arm,trizeps4_defconfig"
+      - fld="arm,u300_defconfig"
+      - fld="arm,u8500_defconfig"
+      - fld="arm,versatile_defconfig"
+      - fld="arm,vexpress_defconfig"
+      - fld="arm,vf610m4_defconfig"
+      - fld="arm,viper_defconfig"
+      - fld="arm,vt8500_v6_v7_defconfig"
+      - fld="arm,xcep_defconfig"
+      - fld="arm,zeus_defconfig"
+      - fld="arm,zx_defconfig"
+
+before_script:
+     - mkdir -p $HOME/bin
+     - cp ./make.cross $HOME/bin/.
+
+script:
+    - a=(`echo $fld | tr ',' '\n'`)
+    - mkdir obj-${a[0]}
+    - make.cross ARCH=${a[0]} ${a[1]}
+    - make.cross ARCH=${a[0]} oldconfig
+    - make.cross ARCH=${a[0]} prepare
+    - make.cross ARCH=${a[0]}
+
+notifications:
+    email:
+      recipients:
+            - sudipm.mukherjee@gmail.com
+      on_success: always
+      on_failure: always
